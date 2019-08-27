@@ -47,3 +47,5 @@ like
         printf("output: %d %d %d\n", ret, nfiles, ofiles);
 ```
 
+The next steps are to handle the saving of context and tracking memory pages and properly
+restoring those. This is the bigger of the steps :). Input always welcomed.
