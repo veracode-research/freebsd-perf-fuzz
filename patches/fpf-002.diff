@@ -1,0 +1,1014 @@
+diff -Nur sys.orig/amd64/conf/GENERIC sys/amd64/conf/GENERIC
+--- sys.orig/amd64/conf/GENERIC	2018-12-06 20:01:49.000000000 -0400
++++ sys/amd64/conf/GENERIC	2019-08-05 13:11:35.367328000 -0400
+@@ -30,8 +30,8 @@
+ options 	VIMAGE			# Subsystem virtualization, e.g. VNET
+ options 	INET			# InterNETworking
+ options 	INET6			# IPv6 communications protocols
+-options 	IPSEC			# IP (v4/v6) security
+-options 	IPSEC_SUPPORT		# Allow kldload of ipsec and tcpmd5
++#options 	IPSEC			# IP (v4/v6) security
++#options 	IPSEC_SUPPORT		# Allow kldload of ipsec and tcpmd5
+ options 	TCP_OFFLOAD		# TCP offload
+ options 	TCP_BLACKBOX		# Enhanced TCP event logging
+ options 	TCP_HHOOK		# hhook(9) framework for TCP
+@@ -52,7 +52,7 @@
+ options 	CD9660			# ISO 9660 Filesystem
+ options 	PROCFS			# Process filesystem (requires PSEUDOFS)
+ options 	PSEUDOFS		# Pseudo-filesystem framework
+-options 	GEOM_RAID		# Soft RAID functionality.
++#options 	GEOM_RAID		# Soft RAID functionality.
+ options 	GEOM_LABEL		# Provides labelization
+ options 	EFIRT			# EFI Runtime Services support
+ options 	COMPAT_FREEBSD32	# Compatible with i386 binaries
+@@ -73,10 +73,10 @@
+ options 	PRINTF_BUFR_SIZE=128	# Prevent printf output being interspersed.
+ options 	KBD_INSTALL_CDEV	# install a CDEV entry in /dev
+ options 	HWPMC_HOOKS		# Necessary kernel hooks for hwpmc(4)
+-options 	AUDIT			# Security event auditing
+-options 	CAPABILITY_MODE		# Capsicum capability mode
+-options 	CAPABILITIES		# Capsicum capabilities
+-options 	MAC			# TrustedBSD MAC Framework
++#options 	AUDIT			# Security event auditing
++#options 	CAPABILITY_MODE		# Capsicum capability mode
++#options 	CAPABILITIES		# Capsicum capabilities
++#options 	MAC			# TrustedBSD MAC Framework
+ options 	KDTRACE_FRAME		# Ensure frames are compiled in
+ options 	KDTRACE_HOOKS		# Kernel DTrace hooks
+ options 	DDB_CTF			# Kernel ELF linker loads CTF data
+@@ -219,55 +219,55 @@
+ device		puc			# Multi I/O cards and multi-channel UARTs
+ 
+ # PCI Ethernet NICs.
+-device		bxe			# Broadcom NetXtreme II BCM5771X/BCM578XX 10GbE
+-device		de			# DEC/Intel DC21x4x (``Tulip'')
++#device		bxe			# Broadcom NetXtreme II BCM5771X/BCM578XX 10GbE
++#device		de			# DEC/Intel DC21x4x (``Tulip'')
+ device		em			# Intel PRO/1000 Gigabit Ethernet Family
+-device		ix			# Intel PRO/10GbE PCIE PF Ethernet
+-device		ixv			# Intel PRO/10GbE PCIE VF Ethernet
+-device		ixl			# Intel 700 Series Physical Function
+-device		iavf			# Intel Adaptive Virtual Function
+-device		le			# AMD Am7900 LANCE and Am79C9xx PCnet
+-device		ti			# Alteon Networks Tigon I/II gigabit Ethernet
+-device		txp			# 3Com 3cR990 (``Typhoon'')
+-device		vx			# 3Com 3c590, 3c595 (``Vortex'')
++#device		ix			# Intel PRO/10GbE PCIE PF Ethernet
++#device		ixv			# Intel PRO/10GbE PCIE VF Ethernet
++#device		ixl			# Intel 700 Series Physical Function
++#device		iavf			# Intel Adaptive Virtual Function
++#device		le			# AMD Am7900 LANCE and Am79C9xx PCnet
++#device		ti			# Alteon Networks Tigon I/II gigabit Ethernet
++#device		txp			# 3Com 3cR990 (``Typhoon'')
++#device		vx			# 3Com 3c590, 3c595 (``Vortex'')
+ 
+ # PCI Ethernet NICs that use the common MII bus controller code.
+ # NOTE: Be sure to keep the 'device miibus' line in order to use these NICs!
+-device		miibus			# MII bus support
+-device		ae			# Attansic/Atheros L2 FastEthernet
+-device		age			# Attansic/Atheros L1 Gigabit Ethernet
+-device		alc			# Atheros AR8131/AR8132 Ethernet
+-device		ale			# Atheros AR8121/AR8113/AR8114 Ethernet
+-device		bce			# Broadcom BCM5706/BCM5708 Gigabit Ethernet
+-device		bfe			# Broadcom BCM440x 10/100 Ethernet
+-device		bge			# Broadcom BCM570xx Gigabit Ethernet
+-device		cas			# Sun Cassini/Cassini+ and NS DP83065 Saturn
+-device		dc			# DEC/Intel 21143 and various workalikes
+-device		et			# Agere ET1310 10/100/Gigabit Ethernet
+-device		fxp			# Intel EtherExpress PRO/100B (82557, 82558)
+-device		gem			# Sun GEM/Sun ERI/Apple GMAC
+-device		hme			# Sun HME (Happy Meal Ethernet)
+-device		jme			# JMicron JMC250 Gigabit/JMC260 Fast Ethernet
+-device		lge			# Level 1 LXT1001 gigabit Ethernet
+-device		msk			# Marvell/SysKonnect Yukon II Gigabit Ethernet
+-device		nfe			# nVidia nForce MCP on-board Ethernet
+-device		nge			# NatSemi DP83820 gigabit Ethernet
+-device		pcn			# AMD Am79C97x PCI 10/100 (precedence over 'le')
+-device		re			# RealTek 8139C+/8169/8169S/8110S
+-device		rl			# RealTek 8129/8139
+-device		sf			# Adaptec AIC-6915 (``Starfire'')
+-device		sge			# Silicon Integrated Systems SiS190/191
+-device		sis			# Silicon Integrated Systems SiS 900/SiS 7016
+-device		sk			# SysKonnect SK-984x & SK-982x gigabit Ethernet
+-device		ste			# Sundance ST201 (D-Link DFE-550TX)
+-device		stge			# Sundance/Tamarack TC9021 gigabit Ethernet
+-device		tl			# Texas Instruments ThunderLAN
+-device		tx			# SMC EtherPower II (83c170 ``EPIC'')
+-device		vge			# VIA VT612x gigabit Ethernet
+-device		vr			# VIA Rhine, Rhine II
+-device		wb			# Winbond W89C840F
+-device		xl			# 3Com 3c90x (``Boomerang'', ``Cyclone'')
+-
++#device		miibus			# MII bus support
++#device		ae			# Attansic/Atheros L2 FastEthernet
++#device		age			# Attansic/Atheros L1 Gigabit Ethernet
++#device		alc			# Atheros AR8131/AR8132 Ethernet
++#device		ale			# Atheros AR8121/AR8113/AR8114 Ethernet
++#device		bce			# Broadcom BCM5706/BCM5708 Gigabit Ethernet
++#device		bfe			# Broadcom BCM440x 10/100 Ethernet
++#device		bge			# Broadcom BCM570xx Gigabit Ethernet
++#device		cas			# Sun Cassini/Cassini+ and NS DP83065 Saturn
++#device		dc			# DEC/Intel 21143 and various workalikes
++#device		et			# Agere ET1310 10/100/Gigabit Ethernet
++#device		fxp			# Intel EtherExpress PRO/100B (82557, 82558)
++#device		gem			# Sun GEM/Sun ERI/Apple GMAC
++#device		hme			# Sun HME (Happy Meal Ethernet)
++#device		jme			# JMicron JMC250 Gigabit/JMC260 Fast Ethernet
++#device		lge			# Level 1 LXT1001 gigabit Ethernet
++#device		msk			# Marvell/SysKonnect Yukon II Gigabit Ethernet
++#device		nfe			# nVidia nForce MCP on-board Ethernet
++#device		nge			# NatSemi DP83820 gigabit Ethernet
++#device		pcn			# AMD Am79C97x PCI 10/100 (precedence over 'le')
++#device		re			# RealTek 8139C+/8169/8169S/8110S
++#device		rl			# RealTek 8129/8139
++#device		sf			# Adaptec AIC-6915 (``Starfire'')
++#device		sge			# Silicon Integrated Systems SiS190/191
++#device		sis			# Silicon Integrated Systems SiS 900/SiS 7016
++#device		sk			# SysKonnect SK-984x & SK-982x gigabit Ethernet
++#device		ste			# Sundance ST201 (D-Link DFE-550TX)
++#device		stge			# Sundance/Tamarack TC9021 gigabit Ethernet
++#device		tl			# Texas Instruments ThunderLAN
++#device		tx			# SMC EtherPower II (83c170 ``EPIC'')
++#device		vge			# VIA VT612x gigabit Ethernet
++#device		vr			# VIA Rhine, Rhine II
++#device		wb			# Winbond W89C840F
++#device		xl			# 3Com 3c90x (``Boomerang'', ``Cyclone'')
++#
+ # Wireless NIC cards
+ device		wlan			# 802.11 support
+ options 	IEEE80211_DEBUG		# enable debug msgs
+@@ -326,13 +326,13 @@
+ 
+ # Sound support
+ device		sound			# Generic sound driver (required)
+-device		snd_cmi			# CMedia CMI8338/CMI8738
+-device		snd_csa			# Crystal Semiconductor CS461x/428x
+-device		snd_emu10kx		# Creative SoundBlaster Live! and Audigy
+-device		snd_es137x		# Ensoniq AudioPCI ES137x
+-device		snd_hda			# Intel High Definition Audio
+-device		snd_ich			# Intel, NVidia and other ICH AC'97 Audio
+-device		snd_via8233		# VIA VT8233x Audio
++#device		snd_cmi			# CMedia CMI8338/CMI8738
++#device		snd_csa			# Crystal Semiconductor CS461x/428x
++#device		snd_emu10kx		# Creative SoundBlaster Live! and Audigy
++#device		snd_es137x		# Ensoniq AudioPCI ES137x
++#device		snd_hda			# Intel High Definition Audio
++#device		snd_ich			# Intel, NVidia and other ICH AC'97 Audio
++#device		snd_via8233		# VIA VT8233x Audio
+ 
+ # MMC/SD
+ device		mmc			# MMC/SD bus
+@@ -360,3 +360,5 @@
+ 
+ # Netmap provides direct access to TX/RX rings on supported NICs
+ device		netmap			# netmap(4) support
++
++options	SNAPSHOT	
+diff -Nur sys.orig/amd64/linux/linux_proto.h sys/amd64/linux/linux_proto.h
+--- sys.orig/amd64/linux/linux_proto.h	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux/linux_proto.h	2019-08-05 13:21:42.828594000 -0400
+@@ -2,7 +2,7 @@
+  * System call prototypes.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux/linux_proto.h 339269 2018-10-09 20:42:17Z brooks $
++ * $FreeBSD$
+  */
+ 
+ #ifndef _LINUX_SYSPROTO_H_
+diff -Nur sys.orig/amd64/linux/linux_syscall.h sys/amd64/linux/linux_syscall.h
+--- sys.orig/amd64/linux/linux_syscall.h	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux/linux_syscall.h	2019-08-05 13:21:42.825037000 -0400
+@@ -2,7 +2,7 @@
+  * System call numbers.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux/linux_syscall.h 314783 2017-03-06 18:20:37Z mmokhi $
++ * $FreeBSD$
+  */
+ 
+ #define	LINUX_SYS_read	0
+diff -Nur sys.orig/amd64/linux/linux_syscalls.c sys/amd64/linux/linux_syscalls.c
+--- sys.orig/amd64/linux/linux_syscalls.c	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux/linux_syscalls.c	2019-08-05 13:21:42.825033000 -0400
+@@ -2,7 +2,7 @@
+  * System call names.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux/linux_syscalls.c 314783 2017-03-06 18:20:37Z mmokhi $
++ * $FreeBSD$
+  */
+ 
+ const char *linux_syscallnames[] = {
+diff -Nur sys.orig/amd64/linux/linux_sysent.c sys/amd64/linux/linux_sysent.c
+--- sys.orig/amd64/linux/linux_sysent.c	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux/linux_sysent.c	2019-08-05 13:21:42.827210000 -0400
+@@ -2,7 +2,7 @@
+  * System call switch table.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux/linux_sysent.c 314783 2017-03-06 18:20:37Z mmokhi $
++ * $FreeBSD$
+  */
+ 
+ #include <sys/param.h>
+diff -Nur sys.orig/amd64/linux/linux_systrace_args.c sys/amd64/linux/linux_systrace_args.c
+--- sys.orig/amd64/linux/linux_systrace_args.c	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux/linux_systrace_args.c	2019-08-05 13:21:42.830508000 -0400
+@@ -2,7 +2,7 @@
+  * System call argument to DTrace register array converstion.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux/linux_systrace_args.c 339269 2018-10-09 20:42:17Z brooks $
++ * $FreeBSD$
+  * This file is part of the DTrace syscall provider.
+  */
+ 
+diff -Nur sys.orig/amd64/linux32/linux32_proto.h sys/amd64/linux32/linux32_proto.h
+--- sys.orig/amd64/linux32/linux32_proto.h	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux32/linux32_proto.h	2019-08-05 13:21:52.679411000 -0400
+@@ -2,7 +2,7 @@
+  * System call prototypes.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux32/linux32_proto.h 339269 2018-10-09 20:42:17Z brooks $
++ * $FreeBSD$
+  */
+ 
+ #ifndef _LINUX32_SYSPROTO_H_
+diff -Nur sys.orig/amd64/linux32/linux32_syscall.h sys/amd64/linux32/linux32_syscall.h
+--- sys.orig/amd64/linux32/linux32_syscall.h	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux32/linux32_syscall.h	2019-08-05 13:21:52.677111000 -0400
+@@ -2,7 +2,7 @@
+  * System call numbers.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux32/linux32_syscall.h 314783 2017-03-06 18:20:37Z mmokhi $
++ * $FreeBSD$
+  */
+ 
+ #define	LINUX32_SYS_linux_exit	1
+diff -Nur sys.orig/amd64/linux32/linux32_syscalls.c sys/amd64/linux32/linux32_syscalls.c
+--- sys.orig/amd64/linux32/linux32_syscalls.c	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux32/linux32_syscalls.c	2019-08-05 13:21:52.677109000 -0400
+@@ -2,7 +2,7 @@
+  * System call names.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux32/linux32_syscalls.c 314783 2017-03-06 18:20:37Z mmokhi $
++ * $FreeBSD$
+  */
+ 
+ const char *linux32_syscallnames[] = {
+diff -Nur sys.orig/amd64/linux32/linux32_sysent.c sys/amd64/linux32/linux32_sysent.c
+--- sys.orig/amd64/linux32/linux32_sysent.c	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux32/linux32_sysent.c	2019-08-05 13:21:52.678351000 -0400
+@@ -2,7 +2,7 @@
+  * System call switch table.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux32/linux32_sysent.c 332122 2018-04-06 17:35:35Z brooks $
++ * $FreeBSD$
+  */
+ 
+ #include <sys/param.h>
+diff -Nur sys.orig/amd64/linux32/linux32_systrace_args.c sys/amd64/linux32/linux32_systrace_args.c
+--- sys.orig/amd64/linux32/linux32_systrace_args.c	2018-12-06 20:01:50.000000000 -0400
++++ sys/amd64/linux32/linux32_systrace_args.c	2019-08-05 13:21:52.681559000 -0400
+@@ -2,7 +2,7 @@
+  * System call argument to DTrace register array converstion.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/amd64/linux32/linux32_systrace_args.c 314783 2017-03-06 18:20:37Z mmokhi $
++ * $FreeBSD$
+  * This file is part of the DTrace syscall provider.
+  */
+ 
+diff -Nur sys.orig/conf/NOTES sys/conf/NOTES
+--- sys.orig/conf/NOTES	2018-12-06 20:01:49.000000000 -0400
++++ sys/conf/NOTES	2019-08-05 13:10:47.118093000 -0400
+@@ -3068,3 +3068,6 @@
+ device		spigen		# Generic access to SPI devices from userland.
+ # Enable legacy /dev/spigenN name aliases for /dev/spigenX.Y devices.
+ options 	SPIGEN_LEGACY_CDEVNAME # legacy device names for spigen
++
++# Perf-fuzz support XXX: See <link>
++options		SNAPSHOT	# enable snapshot support
+diff -Nur sys.orig/conf/files sys/conf/files
+--- sys.orig/conf/files	2018-12-06 20:01:49.000000000 -0400
++++ sys/conf/files	2019-08-05 15:18:28.330530000 -0400
+@@ -3837,6 +3837,7 @@
+ kern/kern_sharedpage.c		standard
+ kern/kern_shutdown.c		standard
+ kern/kern_sig.c			standard
++kern/kern_snapshot.c		standard
+ kern/kern_switch.c		standard
+ kern/kern_sx.c			standard
+ kern/kern_synch.c		standard
+diff -Nur sys.orig/conf/options sys/conf/options
+--- sys.orig/conf/options	2018-12-06 20:01:49.000000000 -0400
++++ sys/conf/options	2019-08-05 13:11:04.246490000 -0400
+@@ -1022,3 +1022,6 @@
+ 
+ # amdsbwd options
+ AMDSBWD_DEBUG	opt_amdsbwd.h
++
++# Snapshot options
++SNAPSHOT
+diff -Nur sys.orig/fool sys/fool
+--- sys.orig/fool	1969-12-31 20:00:00.000000000 -0400
++++ sys/fool	2019-08-05 15:04:54.744937000 -0400
+@@ -0,0 +1,3 @@
++make: don't know how to make buildkernel. Stop
++
++make: stopped in /usr/src/sys
+diff -Nur sys.orig/kern/init_sysent.c sys/kern/init_sysent.c
+--- sys.orig/kern/init_sysent.c	2018-12-06 20:01:51.000000000 -0400
++++ sys/kern/init_sysent.c	2019-08-07 16:16:48.731260000 -0400
+@@ -2,7 +2,7 @@
+  * System call switch table.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/kern/init_sysent.c 339002 2018-09-28 17:25:28Z jhb $
++ * $FreeBSD$
+  */
+ 
+ #include <sys/param.h>
+@@ -312,7 +312,7 @@
+ 	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 260 = nosys */
+ 	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 261 = nosys */
+ 	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 262 = nosys */
+-	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 263 = nosys */
++	{ AS(snapshot_args), (sy_call_t *)sys_snapshot, AUE_NULL, NULL, 0, 0, 0, SY_THR_STATIC },	/* 263 = snapshot */
+ 	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 264 = nosys */
+ 	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 265 = nosys */
+ 	{ 0, (sy_call_t *)nosys, AUE_NULL, NULL, 0, 0, 0, SY_THR_ABSENT },			/* 266 = nosys */
+diff -Nur sys.orig/kern/kern_snapshot.c sys/kern/kern_snapshot.c
+--- sys.orig/kern/kern_snapshot.c	1969-12-31 20:00:00.000000000 -0400
++++ sys/kern/kern_snapshot.c	2019-08-07 19:59:19.603615000 -0400
+@@ -0,0 +1,403 @@
++/*
++ * Issues: locking on the _proc lists?
++ *
++ * Issues: how do you remove _proc's? like when do you kill it?
++ */
++#include "opt_snapshot.h"
++
++#ifdef	SNAPSHOT
++#include <sys/param.h>
++#include <sys/proc.h>
++#include <sys/module.h>
++#include <sys/sysproto.h>
++#include <sys/sysent.h>
++#include <sys/kernel.h>
++#include <sys/systm.h>
++#include <sys/lock.h>
++#include <sys/sx.h>
++#include <sys/mutex.h>
++#include <sys/syscall.h>
++#include <sys/kthread.h>
++#include <sys/unistd.h>
++#include <sys/time.h>
++#include <sys/libkern.h>
++#include <sys/filedesc.h>
++#include <vm/vm.h>
++#include <vm/pmap.h>
++#include <vm/vm_map.h>
++#include <sys/queue.h>
++#include <sys/snapshot.h>
++
++MALLOC_DEFINE(M_SNAPSHOT, "perf-fuzz snapshot", "Buffers to buffer with");
++          
++struct snapshot_ctx	snapshot_context;
++
++static void
++snapshot_init(void *arg __unused)
++{
++	memset(&snapshot_context, 0, sizeof(struct snapshot_ctx));
++	sx_init(&snapshot_context.sc_lock, "snapshot_context lock");
++	SNAP_CTX_XLOCK();
++	SNAP_CTX_XUNLOCK();
++}
++static void
++snapshot_fini(void *arg __unused)
++{
++	SNAP_CTX_XLOCK();
++	SNAP_CTX_XUNLOCK();
++	sx_destroy(&snapshot_context.sc_lock);
++	memset(&snapshot_context, 0, sizeof(struct snapshot_ctx));
++}
++	
++SYSINIT(snapshot_sysinit, SI_SUB_EXEC, SI_ORDER_ANY, snapshot_init, NULL);
++SYSUNINIT(snapshot_sysfini, SI_SUB_EXEC, SI_ORDER_ANY, snapshot_fini, NULL);
++
++/********************* **X** *********************/
++
++static
++int
++count_actual_open_files(struct fdescenttbl *ft)
++{
++	int k;
++	int trueOpen = 0;
++	for (k = 0; k < ft->fdt_nfiles; k++) {
++		struct filedescent *ff = &ft->fdt_ofiles[k];	
++		if (ff->fde_file != NULL) {
++			++trueOpen;
++		}
++	}
++	return trueOpen;
++}
++
++static void
++do_files_snapshot(struct snapshot_proc *proc)
++{
++        struct filedescent *ff;
++        struct fdescenttbl *ft;
++        int k;
++        int true_open, num_open_files;
++
++	true_open = num_open_files = 0;
++
++	sx_xlock(&proc->sp_proc->p_fd->fd_sx);
++
++        ft = proc->sp_proc->p_fd->fd_files;
++	true_open = count_actual_open_files(ft);
++
++	proc->sp_fd.sf_inuse = (int *)malloc(true_open * sizeof(int),
++	    M_SNAPSHOT, M_WAITOK|M_ZERO);
++
++	proc->sp_fd.sf_num_entries = 0; // incr up to it and check against
++        num_open_files = ft->fdt_nfiles;
++        for (k = 0; k < num_open_files; k++) {
++		ff = &ft->fdt_ofiles[k];
++		if (ff->fde_file != NULL) {
++			printf("* snapshot: insert %d at %d\n", k,
++				proc->sp_fd.sf_num_entries);
++			proc->sp_fd.sf_inuse[proc->sp_fd.sf_num_entries++] = k;
++		}
++	}
++
++	for (k = 0; k < proc->sp_fd.sf_num_entries; k++) {
++		printf("* snapshot fd: %d at idx=%d\n",
++		    proc->sp_fd.sf_inuse[k], k);
++	}
++
++	// This should be assert'd, I think, or panic()able.	
++	if (true_open != proc->sp_fd.sf_num_entries) {
++		printf("do_files_snapshot: true_open != sf_num_entries\n");
++	}
++	sx_xunlock(&proc->sp_proc->p_fd->fd_sx);
++	printf("do_files_snapshot: number really open %d\n", true_open);
++}
++
++
++
++static void
++clean_files_snapshot(struct snapshot_proc *proc)
++{
++        struct filedescent *ff;
++        struct fdescenttbl *ft;
++	int snap_nfiles;
++	int k, x, nf;
++
++	sx_xlock(&proc->sp_proc->p_fd->fd_sx);
++
++// XXX on locking.
++	snap_nfiles = proc->sp_fd.sf_num_entries;
++        ft = proc->sp_proc->p_fd->fd_files;
++	nf = ft->fdt_nfiles;
++
++	for (k = 0; k < nf; k++) {
++		ff = &ft->fdt_ofiles[k];
++		if (ft->fdt_ofiles[k].fde_file != NULL) {
++			// XXX: this sucks, right here.
++			for (x = 0; x < snap_nfiles; x++) {
++				if (k == proc->sp_fd.sf_inuse[x]) {
++					printf("* %d found at idx=%d\n", k, x);
++					x = -1;
++					break;
++				}
++			}
++			/* since it was found, skip closing it */
++			if (x == -1) {
++				continue;
++			}
++			printf("* closing %d found at idx=%d\n", k, x);
++                        fdclose(curthread, ff->fde_file, k);
++                }
++	}
++	printf("cleaning now have: %d\n", count_actual_open_files(ft));
++	sx_xunlock(&proc->sp_proc->p_fd->fd_sx);
++/*
++                sx_slock(&td->td_proc->p_fd->fd_sx);
++                nf = ft->fdt_nfiles;
++                a = 0;
++                for (k = 0; k < nf; k++) {
++                        ff = &ft->fdt_ofiles[k];
++                        if (ff->fde_file != NULL) {
++ */
++}
++
++static void
++make_snapshot(struct snapshot_proc *sproc)
++{
++//	reserve_context(arg);
++//	reserve_brk();
++//	do_memory_snapshot(arg); 
++
++	do_files_snapshot(sproc);
++}
++
++static void
++recover_snapshot(struct snapshot_proc *sproc)
++{
++	printf("snapshot: recover_snapshot()\n");
++	clean_files_snapshot(sproc);
++
++/* XXX: This is a copy/paste from the GT work, so ... XXX
++	if (have_snapshot(current->mm)) {
++		clear_snapshot(sproc);
++		recover_memory_snapshot(current->mm);
++		recover_brk(current->mm);
++		munmap_new_vmas(current->mm);
++		clean_snapshot_vmas(current->mm);
++		recover_files_snapshot();
++		clean_files_snapshot(sproc);
++		// clean_context(current->mm);
++		// clear_snapshot(current->mm);
++	}
++ */
++}
++
++static
++struct snapshot_proc *
++snapshot_lookup_pid(struct thread *td, pid_t pid, int make_new)
++{
++	struct snapshot_proc *p = NULL, *pIt;
++
++	SNAP_CTX_XLOCK();
++	p = snapshot_context.sc_head;	
++	while (p && p->sp_pid != pid) {
++		p = p->sp_next;
++	}
++	if (p != NULL) {
++		SNAP_CTX_XUNLOCK();
++		return p;
++	}
++	if (!make_new) {
++		SNAP_CTX_XUNLOCK();
++		return NULL;
++	}
++
++	
++	p = (struct snapshot_proc *)malloc(sizeof(struct snapshot_proc),
++	    M_SNAPSHOT, M_WAITOK|M_ZERO);
++	p->sp_pid = pid;
++	p->sp_proc = td->td_proc;
++	p->sp_fd.sf_num_entries = 0;
++	p->sp_fd.sf_inuse = NULL;
++	p->sp_next = NULL;
++	if (snapshot_context.sc_head == NULL) {
++		snapshot_context.sc_head = p;
++	} else {
++		// Insert at last spot
++		pIt = snapshot_context.sc_head;
++		while (pIt->sp_next != NULL) {
++			pIt = pIt->sp_next;
++		}
++		pIt->sp_next = p;		
++	}
++	SNAP_CTX_XUNLOCK();
++	printf("kern_snapshot: added new pid=%d\n", pid);
++	return p;
++}
++
++static
++int
++snapshot_list_all()
++{
++        struct snapshot_proc *p;
++
++	SNAP_CTX_SLOCK();
++	if (snapshot_context.sc_head == NULL) {
++		SNAP_CTX_SUNLOCK();
++		return 0;
++	}
++        p = snapshot_context.sc_head;
++	while (p) {
++		printf("snapshot_list_all: pid=%d\n", p->sp_pid);
++		p = p->sp_next;
++        }
++	SNAP_CTX_SUNLOCK();
++	return 0;
++}
++
++static
++int
++snapshot_clean_all()
++{
++	struct snapshot_proc *p, *next;
++
++	SNAP_CTX_XLOCK();
++	if (snapshot_context.sc_head == NULL) {
++		SNAP_CTX_XUNLOCK();
++		return 0;
++	}
++        p = snapshot_context.sc_head;
++	snapshot_context.sc_head = NULL;
++	while (p) {
++		next = p->sp_next;
++		if (p->sp_fd.sf_inuse)
++			free(p->sp_fd.sf_inuse, M_SNAPSHOT);
++		memset(p, 0, sizeof(struct snapshot_proc));
++		free(p, M_SNAPSHOT);
++		p = next;
++	}
++	SNAP_CTX_XUNLOCK();
++	return 0;
++}
++
++static
++int
++snapshot_clean_pid(pid_t pid)
++{
++	struct snapshot_proc *p, *prior = NULL;
++
++	SNAP_CTX_XLOCK();
++	if (snapshot_context.sc_head == NULL) {
++		SNAP_CTX_XUNLOCK();
++		return 0;
++	}
++	p = snapshot_context.sc_head;
++	if (p->sp_pid == pid) {
++		printf("snapshot_clean_pid: found %d = %d\n", pid, p->sp_pid);
++		snapshot_context.sc_head = p->sp_next;
++		printf("snapshot_clean_pid: head now %p\n",
++		    snapshot_context.sc_head);
++		if (p->sp_fd.sf_inuse)
++			free(p->sp_fd.sf_inuse, M_SNAPSHOT);
++		memset(p, 0, sizeof(struct snapshot_proc));
++		free(p, M_SNAPSHOT);
++		p = NULL;
++		SNAP_CTX_XUNLOCK();
++		return 0;
++	}
++	while (p && p->sp_pid != pid) {
++		prior = p;
++		p = p->sp_next;
++	}
++	if (p == NULL) {
++		printf("snapshot_clean_pid: unable to find pid=%d\n", pid);
++		SNAP_CTX_XUNLOCK();
++		return 0;
++	}
++	printf("snapshot_clean_pid: found %d = %d\n", pid, p->sp_pid);
++	prior->sp_next = p->sp_next;
++	if (p->sp_fd.sf_inuse)
++		free(p->sp_fd.sf_inuse, M_SNAPSHOT);
++	memset(p, 0, sizeof(struct snapshot_proc));
++	free(p, M_SNAPSHOT);
++	p = NULL;
++	SNAP_CTX_XUNLOCK();
++	return 0;
++}
++
++static
++void
++clean_snapshot(struct snapshot_proc *sproc)
++{
++//	clean_memory_snapshot(current->mm);
++//	clean_snapshot_vmas(current->mm);
++
++	clean_files_snapshot(sproc);
++
++//	clean_context(current->mm);
++//	clear_snapshot(current->mm);
++}
++
++/*
++ * primary entry point to the logic for snapshot and replay.
++ */
++int
++kern_snapshot(struct thread *td, int cmd, pid_t pid)
++{
++	struct snapshot_proc *p = NULL;
++	pid_t this_pid;
++
++	if (pid == 0) {	
++		this_pid = td->td_proc->p_pid;
++	} else {
++		this_pid = pid;
++	}
++
++	switch (cmd) {
++	case SNAPSHOT_START:
++		printf("* snapshot_start\n");
++		p = snapshot_lookup_pid(td, this_pid, 1);
++		make_snapshot(p);
++		break;
++	case SNAPSHOT_END:
++		printf("* snapshot_end\n");
++		p = snapshot_lookup_pid(td, this_pid, 0);
++		if (p == NULL) {
++			printf("kern_snapshot: invalid pid=%d\n", this_pid);
++			return -1;
++		}
++		recover_snapshot(p);
++		break;
++	case SNAPSHOT_CLEAN_PID:
++		printf("* snapshot_clean_pid\n");
++		snapshot_clean_pid(this_pid);
++		break;
++	case SNAPSHOT_CLEAN_ALL:
++		printf("* snapshot_clean_all\n");
++		snapshot_clean_all();
++		break;
++	case SNAPSHOT_LIST_ALL:
++		printf("* snapshot_list_all\n");
++		snapshot_list_all();
++		break;
++	default:
++		printf("kern_snapshot: invalid cmd=%d\n", cmd);
++		break;
++	}
++	return 0;
++}
++
++
++
++int
++sys_snapshot(struct thread *td, struct snapshot_args *uap)
++{
++	return (kern_snapshot(td, uap->cmd, uap->pid));
++}
++
++#else
++/* Dummy implementation */
++int
++sys_snapshot(struct thread *td, struct snapshot_args *uap)
++{
++	return -1;
++}
++#endif	// !SNAPSHOT
+diff -Nur sys.orig/kern/syscalls.c sys/kern/syscalls.c
+--- sys.orig/kern/syscalls.c	2018-12-06 20:01:51.000000000 -0400
++++ sys/kern/syscalls.c	2019-08-07 16:16:48.730065000 -0400
+@@ -2,7 +2,7 @@
+  * System call names.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/kern/syscalls.c 339002 2018-09-28 17:25:28Z jhb $
++ * $FreeBSD$
+  */
+ 
+ const char *syscallnames[] = {
+@@ -269,7 +269,7 @@
+ 	"#260",			/* 260 = nosys */
+ 	"#261",			/* 261 = nosys */
+ 	"#262",			/* 262 = nosys */
+-	"#263",			/* 263 = nosys */
++	"snapshot",			/* 263 = snapshot */
+ 	"#264",			/* 264 = nosys */
+ 	"#265",			/* 265 = nosys */
+ 	"#266",			/* 266 = nosys */
+diff -Nur sys.orig/kern/syscalls.master sys/kern/syscalls.master
+--- sys.orig/kern/syscalls.master	2018-12-06 20:01:51.000000000 -0400
++++ sys/kern/syscalls.master	2019-08-07 16:16:31.835521000 -0400
+@@ -616,7 +616,7 @@
+ 260	AUE_NULL	UNIMPL	nosys
+ 261	AUE_NULL	UNIMPL	nosys
+ 262	AUE_NULL	UNIMPL	nosys
+-263	AUE_NULL	UNIMPL	nosys
++263	AUE_NULL	STD	{ int snapshot(int cmd, pid_t pid); }
+ 264	AUE_NULL	UNIMPL	nosys
+ 265	AUE_NULL	UNIMPL	nosys
+ 266	AUE_NULL	UNIMPL	nosys
+diff -Nur sys.orig/kern/systrace_args.c sys/kern/systrace_args.c
+--- sys.orig/kern/systrace_args.c	2018-12-06 20:01:51.000000000 -0400
++++ sys/kern/systrace_args.c	2019-08-07 16:16:48.733981000 -0400
+@@ -2,7 +2,7 @@
+  * System call argument to DTrace register array converstion.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/kern/systrace_args.c 337925 2018-08-16 19:09:43Z jamie $
++ * $FreeBSD$
+  * This file is part of the DTrace syscall provider.
+  */
+ 
+@@ -1320,6 +1320,14 @@
+ 		*n_args = 4;
+ 		break;
+ 	}
++	/* snapshot */
++	case 263: {
++		struct snapshot_args *p = params;
++		iarg[0] = p->cmd; /* int */
++		iarg[1] = p->pid; /* pid_t */
++		*n_args = 2;
++		break;
++	}
+ 	/* lchmod */
+ 	case 274: {
+ 		struct lchmod_args *p = params;
+@@ -5352,6 +5360,19 @@
+ 			break;
+ 		};
+ 		break;
++	/* snapshot */
++	case 263:
++		switch(ndx) {
++		case 0:
++			p = "int";
++			break;
++		case 1:
++			p = "pid_t";
++			break;
++		default:
++			break;
++		};
++		break;
+ 	/* lchmod */
+ 	case 274:
+ 		switch(ndx) {
+@@ -9473,6 +9494,11 @@
+ 		break;
+ 	/* lio_listio */
+ 	case 257:
++		if (ndx == 0 || ndx == 1)
++			p = "int";
++		break;
++	/* snapshot */
++	case 263:
+ 		if (ndx == 0 || ndx == 1)
+ 			p = "int";
+ 		break;
+diff -Nur sys.orig/sys/filedesc.h sys/sys/filedesc.h
+--- sys.orig/sys/filedesc.h	2018-12-06 20:01:59.000000000 -0400
++++ sys/sys/filedesc.h	2019-08-05 16:23:30.604329000 -0400
+@@ -35,6 +35,8 @@
+ #ifndef _SYS_FILEDESC_H_
+ #define	_SYS_FILEDESC_H_
+ 
++#include "opt_snapshot.h"
++
+ #include <sys/caprights.h>
+ #include <sys/queue.h>
+ #include <sys/event.h>
+@@ -45,6 +47,10 @@
+ 
+ #include <machine/_limits.h>
+ 
++#ifdef	SNAPSHOT
++#include <sys/snapshot.h>
++#endif
++
+ struct filecaps {
+ 	cap_rights_t	 fc_rights;	/* per-descriptor capability rights */
+ 	u_long		*fc_ioctls;	/* per-descriptor allowed ioctls */
+@@ -66,6 +72,9 @@
+ 
+ struct fdescenttbl {
+ 	int	fdt_nfiles;		/* number of open files allocated */
++#ifdef	SNAPSHOT	
++	struct snapshot_proc	*fdt_snapproc;
++#endif
+ 	struct	filedescent fdt_ofiles[0];	/* open files */
+ };
+ #define	fd_seq(fdt, fd)	(&(fdt)->fdt_ofiles[(fd)].fde_seq)
+diff -Nur sys.orig/sys/snapshot.h sys/sys/snapshot.h
+--- sys.orig/sys/snapshot.h	1969-12-31 20:00:00.000000000 -0400
++++ sys/sys/snapshot.h	2019-08-07 19:15:26.649636000 -0400
+@@ -0,0 +1,55 @@
++#ifndef	__SNAPSHOT_H
++#define	__SNAPSHOT_H
++
++struct snapshot_args;
++int     sys_snapshot(struct thread *td, struct snapshot_args *uap);
++
++#include "opt_snapshot.h"
++
++#ifdef	SNAPSHOT
++#include <sys/param.h>
++#include <sys/lock.h>
++#include <sys/sx.h>
++
++#define	SNAPSHOT_START	1
++#define	SNAPSHOT_END	2
++#define	SNAPSHOT_CLEAN_PID	3
++#define	SNAPSHOT_CLEAN_ALL	4
++#define	SNAPSHOT_LIST_ALL	5
++
++struct snapshot_fd {
++	int	sf_num_entries;
++	int	*sf_inuse; // alloc sf_num_entries * sizeof(int)
++};
++
++struct snapshot_proc {
++	pid_t	sp_pid;
++	struct proc	*sp_proc;
++	struct snapshot_fd	sp_fd;
++	struct snapshot_proc	*sp_next;
++};
++
++struct snapshot_ctx {
++	struct sx sc_lock;
++	int	sc_nentries;
++	int	sc_maxentries;
++
++	struct snapshot_proc *sc_head;
++};
++
++extern struct snapshot_ctx	snapshot_context;
++
++
++#define	SNAP_CTX_XLOCK()	sx_xlock(&snapshot_context.sc_lock)
++#define	SNAP_CTX_XUNLOCK()	sx_xunlock(&snapshot_context.sc_lock)
++#define	SNAP_CTX_SLOCK()	sx_slock(&snapshot_context.sc_lock)
++#define	SNAP_CTX_SUNLOCK()	sx_sunlock(&snapshot_context.sc_lock)
++
++#include <sys/malloc.h>
++
++MALLOC_DECLARE(M_SNAPSHOT);
++
++// A bit of a hack to add the pid_t argument like this.
++int	kern_snapshot(struct thread *td, int command, pid_t pid);
++#endif	// SNAPSHOT
++#endif	// !__SNAPSHOT_H
+diff -Nur sys.orig/sys/syscall.h sys/sys/syscall.h
+--- sys.orig/sys/syscall.h	2018-12-06 20:01:59.000000000 -0400
++++ sys/sys/syscall.h	2019-08-07 16:16:48.730067000 -0400
+@@ -2,7 +2,7 @@
+  * System call numbers.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/sys/syscall.h 339002 2018-09-28 17:25:28Z jhb $
++ * $FreeBSD$
+  */
+ 
+ #define	SYS_syscall	0
+@@ -234,6 +234,7 @@
+ #define	SYS_aio_read	255
+ #define	SYS_aio_write	256
+ #define	SYS_lio_listio	257
++#define	SYS_snapshot	263
+ #define	SYS_freebsd11_getdents	272
+ #define	SYS_lchmod	274
+ 				/* 275 is obsolete netbsd_lchown */
+diff -Nur sys.orig/sys/syscall.mk sys/sys/syscall.mk
+--- sys.orig/sys/syscall.mk	2018-12-06 20:01:59.000000000 -0400
++++ sys/sys/syscall.mk	2019-08-07 16:16:48.730070000 -0400
+@@ -1,6 +1,6 @@
+ # FreeBSD system call object files.
+ # DO NOT EDIT-- this file is automatically generated.
+-# $FreeBSD: releng/12.0/sys/sys/syscall.mk 337925 2018-08-16 19:09:43Z jamie $
++# $FreeBSD$
+ MIASM =  \
+ 	syscall.o \
+ 	exit.o \
+@@ -168,6 +168,7 @@
+ 	aio_read.o \
+ 	aio_write.o \
+ 	lio_listio.o \
++	snapshot.o \
+ 	freebsd11_getdents.o \
+ 	lchmod.o \
+ 	lutimes.o \
+diff -Nur sys.orig/sys/sysproto.h sys/sys/sysproto.h
+--- sys.orig/sys/sysproto.h	2018-12-06 20:01:59.000000000 -0400
++++ sys/sys/sysproto.h	2019-08-07 16:16:48.732476000 -0400
+@@ -2,7 +2,7 @@
+  * System call prototypes.
+  *
+  * DO NOT EDIT-- this file is automatically generated.
+- * $FreeBSD: releng/12.0/sys/sys/sysproto.h 340389 2018-11-12 21:53:47Z brooks $
++ * $FreeBSD$
+  */
+ 
+ #ifndef _SYS_SYSPROTO_H_
+@@ -714,6 +714,10 @@
+ 	char nent_l_[PADL_(int)]; int nent; char nent_r_[PADR_(int)];
+ 	char sig_l_[PADL_(struct sigevent *)]; struct sigevent * sig; char sig_r_[PADR_(struct sigevent *)];
+ };
++struct snapshot_args {
++	char cmd_l_[PADL_(int)]; int cmd; char cmd_r_[PADR_(int)];
++	char pid_l_[PADL_(pid_t)]; pid_t pid; char pid_r_[PADR_(pid_t)];
++};
+ struct lchmod_args {
+ 	char path_l_[PADL_(char *)]; char * path; char path_r_[PADR_(char *)];
+ 	char mode_l_[PADL_(mode_t)]; mode_t mode; char mode_r_[PADR_(mode_t)];
+@@ -1925,6 +1929,7 @@
+ int	sys_aio_read(struct thread *, struct aio_read_args *);
+ int	sys_aio_write(struct thread *, struct aio_write_args *);
+ int	sys_lio_listio(struct thread *, struct lio_listio_args *);
++int	sys_snapshot(struct thread *, struct snapshot_args *);
+ int	sys_lchmod(struct thread *, struct lchmod_args *);
+ int	sys_lutimes(struct thread *, struct lutimes_args *);
+ int	sys_preadv(struct thread *, struct preadv_args *);
+@@ -2803,6 +2808,7 @@
+ #define	SYS_AUE_aio_read	AUE_AIO_READ
+ #define	SYS_AUE_aio_write	AUE_AIO_WRITE
+ #define	SYS_AUE_lio_listio	AUE_LIO_LISTIO
++#define	SYS_AUE_snapshot	AUE_NULL
+ #define	SYS_AUE_freebsd11_getdents	AUE_O_GETDENTS
+ #define	SYS_AUE_lchmod	AUE_LCHMOD
+ #define	SYS_AUE_lutimes	AUE_LUTIMES
