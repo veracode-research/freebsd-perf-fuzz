@@ -168,6 +168,7 @@ MIASM =  \
 	aio_read.o \
 	aio_write.o \
 	lio_listio.o \
+	snapshot.o \
 	freebsd11_getdents.o \
 	lchmod.o \
 	lutimes.o \

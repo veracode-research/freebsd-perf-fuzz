@@ -1022,3 +1022,7 @@ NVME_USE_NVD	opt_nvme.h
 
 # amdsbwd options
 AMDSBWD_DEBUG	opt_amdsbwd.h
+
+# Snapshot options
+SNAPSHOT
+SNAPSHOT_DEBUG	opt_snapshot.h

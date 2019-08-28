@@ -1320,6 +1320,14 @@ systrace_args(int sysnum, void *params, uint64_t *uarg, int *n_args)
 		*n_args = 4;
 		break;
 	}
+	/* snapshot */
+	case 263: {
+		struct snapshot_args *p = params;
+		iarg[0] = p->cmd; /* int */
+		iarg[1] = p->pid; /* pid_t */
+		*n_args = 2;
+		break;
+	}
 	/* lchmod */
 	case 274: {
 		struct lchmod_args *p = params;
@@ -5347,6 +5355,19 @@ systrace_entry_setargdesc(int sysnum, int ndx, char *desc, size_t descsz)
 			break;
 		case 3:
 			p = "userland struct sigevent *";
+			break;
+		default:
+			break;
+		};
+		break;
+	/* snapshot */
+	case 263:
+		switch(ndx) {
+		case 0:
+			p = "int";
+			break;
+		case 1:
+			p = "pid_t";
 			break;
 		default:
 			break;
@@ -9473,6 +9494,11 @@ systrace_return_setargdesc(int sysnum, int ndx, char *desc, size_t descsz)
 		break;
 	/* lio_listio */
 	case 257:
+		if (ndx == 0 || ndx == 1)
+			p = "int";
+		break;
+	/* snapshot */
+	case 263:
 		if (ndx == 0 || ndx == 1)
 			p = "int";
 		break;

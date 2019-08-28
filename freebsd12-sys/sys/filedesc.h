@@ -35,6 +35,8 @@
 #ifndef _SYS_FILEDESC_H_
 #define	_SYS_FILEDESC_H_
 
+#include "opt_snapshot.h"
+
 #include <sys/caprights.h>
 #include <sys/queue.h>
 #include <sys/event.h>
@@ -44,6 +46,10 @@
 #include <sys/sx.h>
 
 #include <machine/_limits.h>
+
+#ifdef	SNAPSHOT
+#include <sys/snapshot.h>
+#endif
 
 struct filecaps {
 	cap_rights_t	 fc_rights;	/* per-descriptor capability rights */
@@ -66,6 +72,9 @@ struct filedescent {
 
 struct fdescenttbl {
 	int	fdt_nfiles;		/* number of open files allocated */
+#ifdef	SNAPSHOT	
+	struct snapshot_proc	*fdt_snapproc;
+#endif
 	struct	filedescent fdt_ofiles[0];	/* open files */
 };
 #define	fd_seq(fdt, fd)	(&(fdt)->fdt_ofiles[(fd)].fde_seq)

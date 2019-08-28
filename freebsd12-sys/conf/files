@@ -3837,6 +3837,7 @@ kern/kern_sendfile.c		standard
 kern/kern_sharedpage.c		standard
 kern/kern_shutdown.c		standard
 kern/kern_sig.c			standard
+kern/kern_snapshot.c		standard
 kern/kern_switch.c		standard
 kern/kern_sx.c			standard
 kern/kern_synch.c		standard
