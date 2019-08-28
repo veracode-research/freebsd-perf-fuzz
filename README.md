@@ -4,7 +4,8 @@ FreeBSD port of the [perf-fuzz](https://github.com/sslab-gatech/perf-fuzz)
 OS optimized fuzzer.
 
 This is a **work-in-progress** but we will do our best to keep some notes
-available as to the state of things.
+available as to the state of things. Feel free to contribute or ask about
+contributing, if you are interested.
 
 There are two pieces to this puzzle:
 
@@ -16,7 +17,8 @@ system call.
 The `patches` directory contains patches to `src/sys/*` in the 12.0-RELEASE
 source tree. It would be a module, but the changes are enough to warrant
 modification to the static code. In the near future I will likely pull a
-12.0-RELEASE tree into this repo so as to remove the patch step.
+12.0-RELEASE tree into this repo so as to remove the patch step / make it
+easier to revert changes on the development side.
 
 ## Status
 

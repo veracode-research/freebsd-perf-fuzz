@@ -1,37 +1,38 @@
 
 # FreeBSD Port
 
-I initially started to do things entirely within a FreeBSD kernel module (KLD)
-but that was primarily for investigatory reasons. After understanding, a tiny
-bit more, the Linux perf-fuzz code, I realized the desire to have some fairly
-static things in the kernel be modified for this implementation. For this 
-reason, I am currently storing patches to FreeBSD 12.0's /usr/src/sys path.
-I will pull in a full tree at some point in the future, I think, but I do
-not want the repo to be so heavy just yet.
+**Work in Progress**
 
-When applying these, each is a diff against 12.0-RELEASE, so you only want
-one patch.
+The `latest.patch` will patch the sys/ path in the FreeBSD
+12.0-RELEASE source tree. I plan to pull in a copy of the
+sys directory here so that changes are easier to revert.
 
+You can add the patch to your FreeBSD 12.0-RELEASE tree by:
 
-## diffs
+```
+$ patch -d /path/to/src/sys -p1 < latest.patch
+```
 
 
-- **fpf-001.diff**: Adding the kernel compilation option bits for snapshot().
-I add a dummy holder and a real implementation, mostly because I just wanted
-to be sure things were defined (likely overkill of me forgetting how to do
-things properly). Effectively, the implementation so far has snapshotting of
-open file descriptors and reset of fd state back to those logged open at 
-snapshot time. This does not attempt to reverse anything, just a hammer
-closing fds open that were not open at snapshot time. The implementation 
-differs from the Linux one, ignoring bits not implemented yet, in that the
-snapshot code does keep some information about processes that are using it.
-These are structures that are also pointed to by some values within 
-`struct proc`. Currently, there is no clean-up for these snapshot using 
-processes... If that proc goes away, the snapshot proc data is still there
-pointing at who knows what; so that's an issue. All in all, this is a first
-step.
+The latest.patch as of August 28, 2019 provides the basics
+of the snapshot() system call and implements a naive means
+to handle file descriptors and reseting them.
+
+Note that if you are picking bits and parts to pull into your
+tree, ensure that your `KERNCONF` contains `options SNAPSHOT`
+and, if desired, `options SNAPSHOT_DEBUG`.
+
+Some reminders on kernel building:
+
+```
+make -C sys/kern/ sysent
+make -C sys/i386/linux sysent
+make -C sys/amd64/linux sysent
+make -C sys/amd64/linux32  sysent
+make -C sys/compat/freebsd32 sysent
+
+make buildkernel KERNCONF=${YOURCONFIG}
+make installkernel KERNCONF=${YOURCONFIG}
+```
 
 
-- **fpf-002.diff**: Add mechanisms for listing existing snapshots and cleaning
-up those existing. The diff is a superset of the prior diff. I will make things
-patch sets or make a git soon enough.
